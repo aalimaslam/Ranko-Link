@@ -1,12 +1,12 @@
-"use client"
+"use client";
 
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Search, BookOpen } from "lucide-react"
-import { motion } from "framer-motion"
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Search, BookOpen } from "lucide-react";
+import { motion } from "framer-motion";
 
 interface BlogHeroProps {
-  onSearchChange: (query: string) => void
+  onSearchChange: (query: string) => void;
 }
 
 export default function BlogHeroRedesigned({ onSearchChange }: BlogHeroProps) {
@@ -39,7 +39,9 @@ export default function BlogHeroRedesigned({ onSearchChange }: BlogHeroProps) {
           transition={{ delay: 0.25, duration: 0.45 }}
           className="font-heading font-bold text-4xl sm:text-5xl lg:text-6xl leading-tight tracking-tight text-balance"
         >
-          <span className="text-blue-900 dark:text-white">Master SEO with </span>
+          <span className="text-blue-900 dark:text-white">
+            Master SEO with{" "}
+          </span>
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-400">
             Expert Insights
           </span>
@@ -52,7 +54,8 @@ export default function BlogHeroRedesigned({ onSearchChange }: BlogHeroProps) {
           transition={{ delay: 0.35, duration: 0.45 }}
           className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed"
         >
-          Stay ahead with actionable SEO strategies, link building guides, and expert analyses from the RankoLink team.
+          Stay ahead with actionable SEO strategies, link building guides, and
+          expert analyses from the RankoLink team.
         </motion.p>
 
         {/* Search Bar */}
@@ -62,17 +65,47 @@ export default function BlogHeroRedesigned({ onSearchChange }: BlogHeroProps) {
           transition={{ delay: 0.45, duration: 0.4 }}
           className="max-w-xl mx-auto"
         >
-          <div className="relative flex items-center shadow-lg rounded-2xl border border-blue-200 dark:border-blue-800 bg-white dark:bg-blue-900">
-            <Search className="absolute left-4 text-blue-500 dark:text-blue-300 w-5 h-5" />
+          <div
+            className="
+      relative flex items-center 
+      bg-white/80 backdrop-blur-xl
+      dark:bg-blue-900/40 
+      rounded-2xl
+      border border-blue-200/60 dark:border-blue-800/60
+      shadow-[0_4px_20px_rgba(30,64,175,0.12)]
+      transition-all duration-300
+      hover:shadow-[0_6px_28px_rgba(30,64,175,0.18)]
+    "
+          >
+            {/* Search Icon */}
+            <Search className="absolute left-4 text-blue-600 dark:text-blue-300 w-5 h-5" />
+
+            {/* Input */}
             <Input
               type="text"
               placeholder="Search articles, guides, and insights..."
-              className="pl-12 pr-32 py-5 text-base rounded-2xl border-none bg-transparent focus:ring-0 focus:outline-none placeholder:text-gray-400 dark:placeholder:text-gray-400"
-              onChange={e => onSearchChange(e.target.value)}
+              className="
+        pl-14 pr-36 py-5 
+        text-base rounded-2xl
+        bg-transparent border-none 
+        focus:ring-0 focus:outline-none 
+        placeholder:text-gray-400 dark:placeholder:text-gray-300
+      "
+              onChange={(e) => onSearchChange(e.target.value)}
             />
+
+            {/* Search Button */}
             <Button
-              size="lg"
-              className="absolute right-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 shadow-md"
+              size="sm"
+              className="
+        absolute right-0 
+        rounded-xl px-8 py-5
+        bg-gradient-to-r from-blue-600 to-indigo-600
+        hover:from-blue-700 hover:to-indigo-700
+        text-white font-medium
+        shadow-md hover:shadow-lg
+        transition-all duration-300
+      "
             >
               Search
             </Button>
@@ -80,5 +113,5 @@ export default function BlogHeroRedesigned({ onSearchChange }: BlogHeroProps) {
         </motion.div>
       </div>
     </motion.section>
-  )
+  );
 }
