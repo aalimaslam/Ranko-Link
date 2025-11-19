@@ -1,0 +1,76 @@
+"use client"
+import { motion } from "framer-motion"
+import { InfiniteMovingCards } from "./ui/infinite-moving-cards"
+
+export const reviews = [
+  {
+    name: "Sarah Johnson",
+    company: "TechStart Inc.",
+    role: "Marketing Director",
+    rating: 5,
+    review:
+      "RankoLink transformed our SEO strategy completely. Within 6 months, we saw a 300% increase in organic traffic and secured top rankings for our target keywords. Their white-hat approach gave us confidence in long-term results.",
+    avatar: "SJ",
+  },
+  {
+    name: "Michael Chen",
+    company: "E-commerce Solutions",
+    role: "CEO & Founder",
+    rating: 5,
+    review:
+      "The team at RankoLink is exceptional. Their personalized outreach and quality link placements helped us establish authority in our niche. The detailed reporting keeps us informed every step of the way.",
+    avatar: "MC",
+  },
+  {
+    name: "Emily Rodriguez",
+    company: "Digital Marketing Pro",
+    role: "Growth Manager",
+    rating: 5,
+    review:
+      "As a marketing agency, we needed a reliable white-label partner. RankoLink delivers consistently high-quality backlinks that we're proud to present to our clients. Their transparency and professionalism are unmatched.",
+    avatar: "ER",
+  },
+  {
+    name: "David Thompson",
+    company: "SaaS Startup",
+    role: "Head of Growth",
+    rating: 5,
+    review:
+      "RankoLink's SaaS-focused link building strategy was exactly what we needed. They understood our industry and delivered relevant, high-authority links that boosted both our rankings and referral traffic significantly.",
+    avatar: "DT",
+  },
+]
+
+export default function ClientReviewsRedesigned() {
+  const infiniteReviews = reviews.map(revi => ({ name: revi.name, quote: revi.review, title: revi.role }))
+
+  return (
+    <motion.section
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.8 }}
+      className="relative py-32 overflow-hidden"
+    >
+      <div className="text-center space-y-6 mb-20">
+        <motion.h2
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.2, duration: 0.5 }}
+          className="text-4xl lg:text-5xl font-extrabold font-heading bg-gradient-to-r from-black to-gray-600 bg-clip-text text-transparent relative inline-block"
+        >
+          Loved by Growing Brands
+          <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-16 h-1 bg-gradient-to-r from-black to-gray-400 rounded-full" />
+        </motion.h2>
+        <motion.p
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.3, duration: 0.5 }}
+          className="text-lg lg:text-xl text-gray-500 max-w-3xl mx-auto"
+        >
+          Teams worldwide rely on RankoLink to scale their SEO and dominate search results with proven strategies.
+        </motion.p>
+      </div>
+      <InfiniteMovingCards speed="slow" items={infiniteReviews} />
+    </motion.section>
+  )
+}

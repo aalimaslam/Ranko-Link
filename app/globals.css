@@ -1,0 +1,267 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* @import "tailwindcss"; */
+@import "tw-animate-css";
+
+
+
+@custom-variant dark (&:is(.dark *));
+
+
+:root {
+  /* Enhanced color tokens for modern aesthetic with glassmorphism and premium visual treatments */
+  --background: oklch(1 0 0); /* Pure white */
+  --foreground: oklch(0.15 0 0); /* Deep black for text */
+  --card: oklch(1 0 0 / 0.8); /* Glassmorphism card background */
+  --card-foreground: oklch(0.15 0 0); /* Deep black */
+  --popover: oklch(1 0 0 / 0.9); /* Enhanced glassmorphism popover */
+  --popover-foreground: oklch(0.15 0 0); /* Deep black */
+  --primary: oklch(30.683% 0.09057 251.534); /* Rich blue primary */
+  --primary-foreground: oklch(1 0 0); /* White text on blue */
+  --secondary: oklch(0.35 0.15 240); /* Darker blue accent */
+  --secondary-foreground: oklch(1 0 0); /* White text */
+  --muted: oklch(0.96 0 0); /* Very light gray */
+  --muted-foreground: oklch(0.4 0 0); /* Medium gray */
+  --accent: oklch(30.683% 0.09057 251.534); /* Lighter blue accent */
+  --accent-foreground: oklch(1 0 0); /* White text */
+  --destructive: oklch(0.55 0.22 25); /* Keep red for destructive */
+  --destructive-foreground: oklch(1 0 0); /* White text */
+  --border: oklch(0.9 0 0 / 0.6); /* Light gray borders with transparency */
+  --input: oklch(0.98 0 0 / 0.8); /* Very light input fields */
+  --ring: oklch(0.5 0.2 240 / 0.5); /* Blue ring for focus states */
+  --chart-1: oklch(0.5 0.2 240); /* Primary blue */
+  --chart-2: oklch(0.35 0.15 240); /* Darker blue */
+  --chart-3: oklch(30.683% 0.09057 251.534); /* Lighter blue */
+  --chart-4: oklch(0.15 0 0); /* Black */
+  --chart-5: oklch(0.25 0.1 240); /* Very dark blue */
+  --radius: 0.75rem; /* Increased border radius for modern look */
+  --sidebar: oklch(1 0 0 / 0.95); /* Glassmorphism sidebar */
+  --sidebar-foreground: oklch(0.15 0 0); /* Deep black */
+  --sidebar-primary: oklch(0.96 0 0); /* Very light gray */
+  --sidebar-primary-foreground: oklch(0.15 0 0); /* Deep black */
+  --sidebar-accent: oklch(0.5 0.2 240); /* Primary blue */
+  --sidebar-accent-foreground: oklch(1 0 0); /* White text */
+  --sidebar-border: oklch(0.9 0 0 / 0.4); /* Light borders */
+  --sidebar-ring: oklch(0.5 0.2 240 / 0.5); /* Blue sidebar ring */
+
+  /* Updated font variables to use Inter and Poppins */
+  --font-inter: "Inter", sans-serif;
+  --font-poppins: "Poppins", sans-serif;
+  --font-geist-mono: "Geist Mono", monospace;
+
+  /* Added border radius hierarchy system with max 8px */
+  --radius-xs: 2px; /* Small elements like badges, chips */
+  --radius-sm: 4px; /* Buttons, inputs, small cards */
+  --radius-md: 6px; /* Medium cards, modals */
+  --radius-lg: 8px; /* Large containers, sections */
+
+  /* Added custom properties for enhanced visual effects */
+  --glass-bg: oklch(0.95 0.02 240 / 0.1); /* Subtle blue tint */
+  --glass-border: oklch(0.8 0.05 240 / 0.2); /* Light blue border */
+  --shadow-soft: 0 4px 6px -1px oklch(0.5 0.2 240 / 0.1), 0 2px 4px -1px oklch(0.5 0.2 240 / 0.06);
+  --shadow-medium: 0 10px 15px -3px oklch(0.5 0.2 240 / 0.1), 0 4px 6px -2px oklch(0.5 0.2 240 / 0.05);
+  --shadow-large: 0 20px 25px -5px oklch(0.5 0.2 240 / 0.1), 0 10px 10px -5px oklch(0.5 0.2 240 / 0.04);
+  --gradient-primary: linear-gradient(135deg, oklch(0.5 0.2 240) 0%, oklch(0.6 0.18 240) 100%);
+  --gradient-accent: linear-gradient(135deg, oklch(0.35 0.15 240) 0%, oklch(0.5 0.2 240) 100%);
+  --backdrop-blur: blur(12px);
+}
+
+.dark {
+  /* Enhanced dark mode with glassmorphism support */
+  --background: oklch(0.08 0 0); /* Deeper dark background */
+  --foreground: oklch(0.98 0 0);
+  --card: oklch(0.12 0 0 / 0.8); /* Dark glassmorphism cards */
+  --card-foreground: oklch(0.98 0 0);
+  --popover: oklch(0.12 0 0 / 0.9);
+  --popover-foreground: oklch(0.98 0 0);
+  --primary: oklch(0.55 0.15 160); /* emerald-500 for dark mode */
+  --primary-foreground: oklch(0.08 0 0);
+  --secondary: oklch(0.65 0.18 280); /* Brighter purple for dark mode */
+  --secondary-foreground: oklch(0.98 0 0);
+  --muted: oklch(0.15 0 0);
+  --muted-foreground: oklch(0.7 0 0);
+  --accent: oklch(0.65 0.18 280);
+  --accent-foreground: oklch(0.98 0 0);
+  --destructive: oklch(0.6 0.22 25);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(0.2 0 0 / 0.6);
+  --input: oklch(0.15 0 0 / 0.8);
+  --ring: oklch(0.65 0.18 280 / 0.5);
+  --chart-1: oklch(0.65 0.18 280);
+  --chart-2: oklch(0.6 0.22 25);
+  --chart-3: oklch(0.75 0.15 65);
+  --chart-4: oklch(0.98 0 0);
+  --chart-5: oklch(0.55 0.25 350);
+  --sidebar: oklch(0.1 0 0 / 0.95);
+  --sidebar-foreground: oklch(0.98 0 0);
+  --sidebar-primary: oklch(0.65 0.18 280);
+  --sidebar-primary-foreground: oklch(0.98 0 0);
+  --sidebar-accent: oklch(0.15 0 0);
+  --sidebar-accent-foreground: oklch(0.98 0 0);
+  --sidebar-border: oklch(0.2 0 0 / 0.4);
+  --sidebar-ring: oklch(0.65 0.18 280 / 0.5);
+
+  /* Dark mode glass effects */
+  --glass-bg: oklch(0 0 0 / 0.2);
+  --glass-border: oklch(1 0 0 / 0.1);
+}
+
+@theme inline {
+  /* Updated font variables to use Inter and Poppins */
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-poppins);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  /* Updated radius system to use hierarchy with max 8px */
+  --radius-xs: var(--radius-xs);
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    /* Added smooth scrolling and improved text rendering */
+    scroll-behavior: smooth;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* Added utility classes for glassmorphism and enhanced visual effects */
+@layer utilities {
+  .glass {
+    background: var(--glass-bg);
+    backdrop-filter: var(--backdrop-blur);
+    -webkit-backdrop-filter: var(--backdrop-blur);
+    border: 1px solid var(--glass-border);
+  }
+
+  .glass-card {
+    @apply glass rounded-xl;
+    background: var(--card);
+    backdrop-filter: var(--backdrop-blur);
+    -webkit-backdrop-filter: var(--backdrop-blur);
+  }
+
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
+  }
+
+  .shadow-medium {
+    box-shadow: var(--shadow-medium);
+  }
+
+  .shadow-large {
+    box-shadow: var(--shadow-large);
+  }
+
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+
+  .gradient-accent {
+    background: var(--gradient-accent);
+  }
+
+  .text-gradient {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-large);
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+
+  @keyframes glow {
+    from {
+      box-shadow: 0 0 20px var(--primary);
+    }
+    to {
+      box-shadow: 0 0 30px var(--primary), 0 0 40px var(--primary);
+    }
+  }
+
+  /* Added infinite scroll animation */
+  .animate-scroll {
+    animation: scroll 30s linear infinite;
+  }
+
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+
+  .animate-scroll:hover {
+    animation-play-state: paused;
+  }
+}
