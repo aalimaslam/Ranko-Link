@@ -59,12 +59,29 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           {/* Column 1 — Logo */}
           <div className="space-y-6 group">
-            <div className="flex items-center space-x-3 group-hover:scale-105 transition">
-              <div className="w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-600 rounded-2xl flex items-center justify-center shadow-xl rotate-3 group-hover:rotate-6 transition">
-                <span className="text-white font-bold text-xl">R</span>
-              </div>
-              <span className="font-heading font-bold text-2xl bg-gradient-to-r from-blue-100 to-blue-300 bg-clip-text text-transparent">
-                RankoLink
+            <div className="flex items-center ">
+              {/* 3D Floating Logo */}
+              <img
+                src="/R-Logo.png"
+                alt="RankoLink Logo"
+                className="h-12 w-auto object-contain drop-shadow-[0_5px_12px_rgba(0,0,0,0.25) bg-clip-text text-transparent ] 
+               "
+              />
+
+              {/* “anko Link” Text – connected to the image “R” */}
+              <span className="font-heading font-extrabold text-3xl tracking-tight flex items-baseline">
+                <span
+                  className="bg-gradient-to-r from-indigo-500 via-blue-400 to-blue-500 
+                     bg-clip-text text-transparent"
+                >
+                  anko
+                </span>
+                <span
+                  className="ml-1 bg-gradient-to-r from-indigo-500 to-blue-400 
+                     bg-clip-text text-transparent"
+                >
+                  Link
+                </span>
               </span>
             </div>
 
@@ -245,49 +262,6 @@ export default function Footer() {
         <div className="mt-16 pt-8 border-t border-blue-800 relative">
           {/* Glowing line */}
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-28 h-0.5 bg-gradient-to-r from-transparent via-blue-400 to-transparent" />
-
-          {/* Social Icons (top-right) */}
-          <div className="absolute top-0 right-6 -translate-y-1/2 flex items-center space-x-4">
-            <Link
-              href="https://linkedin.com"
-              target="_blank"
-              className="text-blue-300 hover:text-white transition"
-            >
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 23.5h4V7.98h-4V23.5zM8.48 7.48h3.82v2.19h.05c.53-1 1.83-2.19 3.76-2.19 4.02 0 4.76 2.65 4.76 6.1V23.5h-4v-8.28c0-1.97-.04-4.5-2.75-4.5-2.75 0-3.17 2.15-3.17 4.36V23.5h-4V7.48z" />
-              </svg>
-            </Link>
-
-            <Link
-              href="https://instagram.com"
-              target="_blank"
-              className="text-blue-300 hover:text-white transition"
-            >
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M7 2C4.24 2 2 4.24 2 7v10c0 2.76 2.24 5 5 5h10c2.76 0 5-2.24 5-5V7c0-2.76-2.24-5-5-5H7zm10 2c1.65 0 3 1.35 3 3v10c0 1.65-1.35 3-3 3H7c-1.65 0-3-1.35-3-3V7c0-1.65 1.35-3 3-3h10zm-5 3a5 5 0 100 10 5 5 0 000-10zm4.8-.9a1.1 1.1 0 11-2.2 0 1.1 1.1 0 012.2 0z" />
-              </svg>
-            </Link>
-
-            <Link
-              href="https://facebook.com"
-              target="_blank"
-              className="text-blue-300 hover:text-white transition"
-            >
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M22 12a10 10 0 10-11.5 9.9v-7h-2v-3h2V9.6c0-2 1.2-3.2 3-3.2.9 0 1.8.1 1.8.1v2h-1c-1 0-1.3.6-1.3 1.2V12h2.6l-.4 3h-2.2v7A10 10 0 0022 12z" />
-              </svg>
-            </Link>
-
-            <Link
-              href="https://twitter.com"
-              target="_blank"
-              className="text-blue-300 hover:text-white transition"
-            >
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M22.46 6c-.77.35-1.6.58-2.46.69a4.3 4.3 0 001.88-2.38 8.59 8.59 0 01-2.72 1.05 4.28 4.28 0 00-7.3 3.9A12.13 12.13 0 013 4.89a4.28 4.28 0 001.32 5.71 4.25 4.25 0 01-1.94-.54v.05a4.29 4.29 0 003.44 4.19 4.29 4.29 0 01-1.93.07 4.3 4.3 0 004 2.98A8.6 8.6 0 012 19.53a12.14 12.14 0 006.56 1.92c7.88 0 12.2-6.53 12.2-12.2 0-.19-.01-.37-.02-.56A8.7 8.7 0 0022.46 6z" />
-              </svg>
-            </Link>
-          </div>
 
           {/* Bottom row */}
           <div className="flex flex-col md:flex-row justify-between items-center mt-6 space-y-4 md:space-y-0">

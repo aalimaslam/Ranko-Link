@@ -10,7 +10,7 @@ import {
   useScroll,
   useMotionValueEvent,
 } from "framer-motion";
-import Logo from "@/public/Ranko-Logo.png";
+import Logo from "@/public/RankoLink-logo.svg";
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
