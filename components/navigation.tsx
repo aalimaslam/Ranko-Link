@@ -10,7 +10,7 @@ import {
   useScroll,
   useMotionValueEvent,
 } from "framer-motion";
-
+import Logo from "@/public/RankoLink-logo.svg";
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -77,23 +77,16 @@ export default function Navigation() {
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
         <div className="flex h-16 justify-between items-center">
           {/* LOGO */}
-          <Link href="/" className="flex items-center gap-2">
-            <motion.div
-              initial={{ opacity: 0, y: -8 }}
+          <Link href="/" className="flex items-center">
+            <motion.img
+              src={Logo.src}
+              alt="RankoLink Logo"
+              initial={{ opacity: 0, y: -6 }}
               animate={{ opacity: 1, y: 0 }}
-              whileHover={{ scale: 1.08 }}
-              transition={{ duration: 0.2 }}
-              className="w-9 h-9 bg-gradient-to-br from-purple-400 to-blue-700 rounded-lg flex items-center justify-center shadow-sm"
-            >
-              <span className="text-white font-bold text-lg">R</span>
-            </motion.div>
-
-            <span className="font-bold text-lg sm:text-xl bg-gradient-to-r from-gray-800 via-gray-900 to-black bg-clip-text text-transparent">
-              Ranko{" "}
-              <span className="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
-                Link
-              </span>
-            </span>
+              whileHover={{ scale: 1.03 }}
+              transition={{ duration: 0.25 }}
+              className="h-12 w-auto object-contain"
+            />
           </Link>
 
           {/* DESKTOP NAV */}
