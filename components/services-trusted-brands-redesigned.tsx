@@ -1,63 +1,103 @@
-"use client"
-import { easeOut, motion } from "framer-motion"
+"use client";
+import Image from "next/image";
 
-export default function ServicesTrustedBrandsRedesigned() {
-  const brands = [
-    { name: "Nexus link", logo: "/nexus-link-agency.png" },
-    { name: "Aural Crave", logo: "/aural-crave.jpg" },
-    { name: "Tech Captures", logo: "/tech-captures.png" },
-    { name: "G2", logo: "/g2.svg" },
-    { name: "Roario Neustro", logo: "/rosario-neustro.png" },
-    { name: "Promodo", logo: "/promodo.svg" },
-    { name: "Photoad king", logo: "/photo-ad-king.svg" },
-    // { name: "Dropbox", logo: "/dropbox-logo.png" },
-  ]
+export default function TrustedBrands() {
+  const logos = [
+    {
+      src: "/nexus-link-agency.png",
+      alt: "NexusLink",
+      link: "https://nexuslinkagency.com",
+    },
+    {
+      src: "/aural-crave.jpg",
+      alt: "Auralcrave",
+      link: "https://auralcrave.com",
+    },
+    {
+      src: "/tech-captures.png",
+      alt: "TechCaptures",
+      link: "https://techcaptures.com",
+    },
+    { src: "/g2.png", alt: "G2", link: "https://g2.com" },
+    {
+      src: "/rosario-neustro.png",
+      alt: "Rosario Nuestro",
+      link: "https://rosarionuestro.com",
+    },
+    { src: "/promodo.svg", alt: "Promodo", link: "https://promodo.com" },
+    {
+      src: "/photo-ad-king.svg",
+      alt: "PhotoADKing",
+      link: "https://photoadking.com",
+    },
+    { src: "/stripe-logo.png", alt: "Stripe", link: "https://stripe.com" },
+    { src: "/shopify.svg", alt: "Shopify", link: "https://shopify.com" },
+    { src: "/slack.svg", alt: "Slack", link: "https://slack.com" },
+  ];
 
-  const cardVariants = {
-    hidden: { opacity: 0, y: 40 },
-    visible: (i: number) => ({
-      opacity: 1,
-      y: 0,
-      transition: {
-        delay: i * 0.1,
-        duration: 0.8,
-        ease: easeOut,
-      },
-    }),
-  }
+  // Duplicate list to create seamless infinite scrolling effect
+  const loopLogos = [...logos, ...logos];
 
   return (
-    <section className="py-20 bg-gradient-to-br from-blue-500 to-blue-800 relative overflow-hidden">
+    <section className="py-14 bg-gradient-to-r from-blue-400 via-purple-300 to-blue-400">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center space-y-6">
-          <h2 className="font-heading font-bold text-3xl text-white">Trusted by Leading Brands</h2>
-          <p className="text-blue-50 max-w-2xl mx-auto">
-            We're proud to collaborate with some of the most innovative companies worldwide.
+          <h2 className="font-heading font-bold text-5xl ">
+            Trusted by{" "}
+            <span className="font-heading font-bold text-5xl text-blue-600">
+              Leading Brands
+            </span>
+          </h2>
+          <p className="text-gray-600 max-w-2xl mx-auto">
+            We're proud to collaborate with some of the most innovative
+            companies worldwide.
           </p>
         </div>
 
-        <div className="mt-12 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-8 items-center">
-          {brands.map((brand, index) => (
-            <motion.div
-              key={index}
-              custom={index}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={cardVariants}
-              className="flex items-center justify-center p-4 bg-white rounded-xl border border-blue-200 hover:shadow-xl hover:border-blue-400 transition-all duration-300 group"
-            >
-              <img
-                src={brand.logo || "/placeholder.svg"}
-                alt={brand.name}
-                className="h-10 w-auto object-contain opacity-60 group-hover:opacity-100 transition-all duration-300 transform group-hover:scale-110 group-hover:rotate-1"
-              />
-            </motion.div>
-          ))}
+        {/* OUTER WRAPPER */}
+        <div className="overflow-hidden relative w-full">
+          {/* SCROLLING ROW */}
+          <div className="flex items-center gap-8 animate-scrollR2L whitespace-nowrap">
+            {loopLogos.map((logo, i) => (
+              <a
+                key={i}
+                href={logo.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="
+                  bg-white p-5 rounded-xl border border-gray-200 
+                  flex items-center justify-center min-w-[160px]
+                  transition-transform duration-300 hover:scale-105 hover:shadow-lg
+                "
+              >
+                <Image
+                  src={logo.src}
+                  alt={logo.alt}
+                  width={130}
+                  height={70}
+                  className="object-contain grayscale hover:grayscale-0 transition duration-300"
+                />
+              </a>
+            ))}
+          </div>
         </div>
       </div>
-      <div className="absolute -top-20 -right-20 w-72 h-72 bg-blue-300/30 rounded-full blur-3xl" />
-      <div className="absolute -bottom-20 -left-20 w-72 h-72 bg-cyan-400/20 rounded-full blur-3xl" />
+
+      {/* ANIMATION STYLE */}
+      <style jsx>{`
+        @keyframes scrollR2L {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+
+        .animate-scrollR2L {
+          animation: scrollR2L 25s linear infinite;
+        }
+      `}</style>
     </section>
-  )
+  );
 }
