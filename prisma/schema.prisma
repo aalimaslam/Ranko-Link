@@ -1,0 +1,73 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+ 
+}
+
+/* -------------------------
+   CATEGORY MODEL
+------------------------- */
+model Category {
+  id    Int     @id @default(autoincrement())
+  name  String
+  slug  String  @unique
+
+  // Many-to-many relation
+  posts Post[] @relation("PostCategories")
+}
+
+/* -------------------------
+   TAG MODEL
+------------------------- */
+model Tag {
+  id    Int     @id @default(autoincrement())
+  name  String
+  slug  String @unique
+
+  // Many-to-many relation
+  posts Post[] @relation("PostTags")
+}
+
+/* -------------------------
+   AUTHOR MODEL
+------------------------- */
+model Author {
+  id     Int     @id @default(autoincrement())
+  name   String
+  avatar String?
+
+  posts  Post[]
+}
+
+/* -------------------------
+   POST MODEL (MAIN)
+------------------------- */
+model Post {
+  id            Int       @id @default(autoincrement())
+  title         String
+  slug          String    @unique
+  excerpt       String?
+  content       String
+  publishedAt   DateTime  @default(now())
+  featuredImage String?
+  
+  // Author relation
+  authorId Int?
+  author   Author? @relation(fields: [authorId], references: [id])
+
+  // Many-to-many with categories
+  categories Category[] @relation("PostCategories")
+
+  // Many-to-many with tags
+  tags Tag[] @relation("PostTags")
+}
+
+/* -------------------------------------------------------
+   Prisma automatically creates hidden join tables:
+   - _PostCategories
+   - _PostTags
+   with foreign keys (PostId, CategoryId) / (PostId, TagId)
+-------------------------------------------------------- */
