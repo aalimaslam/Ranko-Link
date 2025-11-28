@@ -1,24 +1,24 @@
-'use client'
+"use client";
 export default function TrafficCTASection() {
   const handleBookCall = () => {
-    alert('Booking functionality would be integrated here!');
-    
+    alert("Booking functionality would be integrated here!");
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center p-5">
       <div className="bg-white rounded-3xl w-full p-10 md:p-16 text-center min-w-[300px] ">
         <h1 className="text-4xl md:text-8xl font-bold text-black mb-6 leading-tight">
-          Let's Double Your Search Traffic
+          <span className="bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent before: line-clamp-4">
+            Let's Double
+          </span>{" "}
+          Your Search Traffic
         </h1>
-        
+
         <p className="text-gray-600 mb-3 text-base md:text-2xl ">
-          We love talking B2B Marketing. Let us know about your project
-          and we'll send you a free proposal.
+          We love talking B2B Marketing. Let us know about your project and
+          we'll send you a free proposal.
         </p>
-        <p className="text-gray-600 text-base mb-8">
-          
-        </p>
+        <p className="text-gray-600 text-base mb-8"></p>
 
         <div className="flex items-center justify-center gap-3 my-10">
           <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white text-xl font-semibold">

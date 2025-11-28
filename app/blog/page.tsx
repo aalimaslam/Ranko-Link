@@ -14,14 +14,13 @@ export default function BlogPage() {
   const [searchQuery, setSearchQuery] = useState<string>("");
 
   // ✅ useCallback prevents unnecessary re-renders of child components
-  const handleCategoryChange = useCallback((categorySlug: string) => {
+  const handleCategoryChange = (categorySlug: string) => {
     setSelectedCategory(categorySlug);
-  }, []);
+  };
 
-  const handleSearchChange = useCallback((query: string) => {
+  const handleSearchChange = (query: string) => {
     setSearchQuery(query);
-  }, []);
-
+  };
   return (
     <div className="flex flex-col min-h-screen bg-background text-foreground">
       <Navigation />
@@ -42,8 +41,8 @@ export default function BlogPage() {
         />
 
         {/* Newsletter Section */}
-        {/* <BlogNewsletterRedesigned />
-        <GrowTogether /> */}
+        {/* <BlogNewsletterRedesigned /> */}
+        {/* <GrowTogether /> */}
       </main>
       <Footer />
     </div>

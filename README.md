@@ -1,9 +1,9 @@
-# Website with animations
+# Ranko Link
 
-*Automatically synced with your [v0.app](https://v0.app) deployments*
+
 
 [![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/aalimaslams-projects/v0-website-with-animations)
-[![Built with v0](https://img.shields.io/badge/Built%20with-v0.app-black?style=for-the-badge)](https://v0.app/chat/projects/FJ05dEGPPQp)
+[![Built with NextJs, TailwindCss](https://img.shields.io/badge/Built%20with-v0.app-black?style=for-the-badge)](https://nextjs.app/chat/projects/FJ05dEGPPQp)
 
 ## Overview
 
