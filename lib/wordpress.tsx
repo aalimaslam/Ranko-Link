@@ -70,7 +70,7 @@ export async function getPosts(params?: {
       `${WORDPRESS_API_URL}?${searchParams}`
     );
 
-    const response = await fetch(`${WORDPRESS_API_URL}?${searchParams}`, {
+    const response = await fetch(`${WORDPRESS_API_URL}/posts?${searchParams}`, {
       next: { revalidate: 300 },
       headers: {
         Accept: "application/json",
@@ -116,7 +116,7 @@ export async function getCategories(): Promise<WordPressCategory[]> {
       `${WORDPRESS_API_URL}`
     );
 
-    const response = await fetch(`${WORDPRESS_API_URL}?per_page=100`, {
+    const response = await fetch(`${WORDPRESS_API_URL}/categories?per_page=100`, {
       next: { revalidate: 3600 },
       headers: {
         Accept: "application/json",
@@ -158,7 +158,7 @@ export async function getPostBySlug(
     }
 
     const response = await fetch(
-      `${WORDPRESS_API_URL}?slug=${slug}&_embed=true`,
+      `${WORDPRESS_API_URL}/posts?slug=${slug}&_embed=true`,
       {
         next: { revalidate: 300 },
         headers: {
