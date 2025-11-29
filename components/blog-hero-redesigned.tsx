@@ -4,12 +4,23 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Search, BookOpen } from "lucide-react";
 import { motion } from "framer-motion";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useDebouncedCallback } from "use-debounce";
 
-interface BlogHeroProps {
-  onSearchChange: (query: string) => void;
-}
+export default function BlogHeroRedesigned() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
 
-export default function BlogHeroRedesigned({ onSearchChange }: BlogHeroProps) {
+  const handleSearch = useDebouncedCallback((term: string) => {
+    const params = new URLSearchParams(searchParams);
+    if (term) {
+      params.set("search", term);
+    } else {
+      params.delete("search");
+    }
+    router.replace(`/blog?${params.toString()}`, { scroll: false });
+  }, 300);
+
   return (
     <motion.section
       initial={{ opacity: 0, y: 20 }}
@@ -91,7 +102,8 @@ export default function BlogHeroRedesigned({ onSearchChange }: BlogHeroProps) {
         focus:ring-0 focus:outline-none 
         placeholder:text-gray-400 dark:placeholder:text-gray-300
       "
-              onChange={(e) => onSearchChange(e.target.value)}
+              defaultValue={searchParams.get("search")?.toString()}
+              onChange={(e) => handleSearch(e.target.value)}
             />
 
             {/* Search Button */}
