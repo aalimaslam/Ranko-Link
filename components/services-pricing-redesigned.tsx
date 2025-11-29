@@ -23,27 +23,7 @@ export default function ServicesPricingRedesigned() {
           <p className="text-xl text-blue-100 max-w-3xl mx-auto">
             Choose from our flexible pricing plans designed to meet your specific link building and SEO needs.
           </p>
-          <div className="bg-gradient-to-r from-blue-500/30 to-blue-400/30 rounded-2xl p-8 border border-blue-300/40 shadow-lg">
-            <div className="space-y-4">
-              <h3 className="font-heading font-semibold text-2xl text-white">
-                Custom Solutions for Every Business
-              </h3>
-              <p className="text-blue-100 max-w-2xl mx-auto">
-                Our pricing is tailored to your specific needs, industry, and goals. We offer transparent, competitive
-                rates with no hidden fees.
-              </p>
-              <Button
-                asChild
-                size="lg"
-                className="bg-white text-blue-700 hover:bg-blue-50 text-lg px-8 py-6 rounded-xl font-semibold shadow-md transition-transform hover:scale-105"
-              >
-                <Link href="/pricing" className="flex items-center gap-2">
-                  Compare Pricing Plans
-                  <ArrowRight className="w-5 h-5" />
-                </Link>
-              </Button>
-            </div>
-          </div>
+         
         </div>
 
         {/* PRICING SECTION */}
@@ -104,7 +84,29 @@ export default function ServicesPricingRedesigned() {
               </Card>
             </motion.div>
           ))}
+          
         </div>
+         <div className="bg-gradient-to-r text-center from-blue-500/30 to-blue-400/30 rounded-2xl p-8 border border-blue-300/40 shadow-lg">
+            <div className="space-y-4">
+              <h3 className="font-heading font-semibold text-2xl text-white">
+                Custom Solutions for Every Business
+              </h3>
+              <p className="text-blue-100 max-w-2xl mx-auto">
+                Our pricing is tailored to your specific needs, industry, and goals. We offer transparent, competitive
+                rates with no hidden fees.
+              </p>
+              <Button
+                asChild
+                size="lg"
+                className="bg-white text-blue-700 hover:bg-blue-50 text-lg px-8 py-6 rounded-xl font-semibold shadow-md transition-transform hover:scale-105"
+              >
+                <Link href="/pricing" className="flex items-center gap-2">
+                  Compare Pricing Plans
+                  <ArrowRight className="w-5 h-5" />
+                </Link>
+              </Button>
+            </div>
+          </div>
       </div>
     </motion.section>
   )

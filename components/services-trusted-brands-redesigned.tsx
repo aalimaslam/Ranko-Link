@@ -59,11 +59,11 @@ export default function TrustedBrands() {
           {/* SCROLLING ROW */}
           <div className="flex items-center gap-8 animate-scrollR2L whitespace-nowrap">
             {loopLogos.map((logo, i) => (
-              <a
+              <div
                 key={i}
-                href={logo.link}
-                target="_blank"
-                rel="noopener noreferrer"
+                // href={logo.link}
+                // target="_blank"
+                // rel="noopener noreferrer"
                 className="
                   bg-white p-5 rounded-xl border border-gray-200 
                   flex items-center justify-center min-w-[160px]
@@ -77,7 +77,7 @@ export default function TrustedBrands() {
                   height={70}
                   className="object-contain grayscale hover:grayscale-0 transition duration-300"
                 />
-              </a>
+              </div>
             ))}
           </div>
         </div>
