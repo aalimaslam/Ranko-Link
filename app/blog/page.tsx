@@ -1,48 +1,70 @@
-"use client";
-
-import { useState, useCallback } from "react";
 import Navigation from "@/components/navigation";
 import Footer from "@/components/footer";
 import BlogHeroRedesigned from "@/components/blog-hero-redesigned";
-import BlogGridRedesigned from "@/components/blog-grid-redesigned";
-import BlogCategoriesRedesigned from "@/components/blog-categories-redesigned";
-import GrowTogether from "@/components/grow-together";
+import BlogGridRedesigned, {
+  BlogGridSkeleton,
+} from "@/components/blog-grid-redesigned";
+import BlogCategoriesRedesigned, {
+  CategoriesSkeleton,
+} from "@/components/blog-categories-redesigned";
 import BlogNewsletterRedesigned from "@/components/blog-newsletter-redesigned";
+import {
+  getCategories,
+  getCategoryIdBySlug,
+  getPosts,
+} from "@/lib/wordpress";
+import { Suspense } from "react";
 
-export default function BlogPage() {
-  const [selectedCategory, setSelectedCategory] = useState<string>("");
-  const [searchQuery, setSearchQuery] = useState<string>("");
+// Server Component (no "use client")
+export default async function BlogPage({
+  searchParams,
+}: {
+  searchParams: { category?: string; search?: string };
+}) {
+  const categorySlug = searchParams.category;
+  const searchQuery = searchParams.search;
 
-  // ✅ useCallback prevents unnecessary re-renders of child components
-  const handleCategoryChange = (categorySlug: string) => {
-    setSelectedCategory(categorySlug);
-  };
+  // 1. Resolve Category ID if a slug is provided
+  let categoryId: number | undefined = undefined;
+  if (categorySlug) {
+    categoryId = await getCategoryIdBySlug(categorySlug);
+  }
 
-  const handleSearchChange = (query: string) => {
-    setSearchQuery(query);
-  };
+  // 2. Fetch Data (Parallel)
+  const categoriesPromise = getCategories();
+  const postsPromise = getPosts({
+    per_page: 12,
+    search: searchQuery,
+    categories: categoryId, // Pass ID (or undefined)
+  });
+
+  const [categories, { posts }] = await Promise.all([
+    categoriesPromise,
+    postsPromise,
+  ]);
+
   return (
     <div className="flex flex-col min-h-screen bg-background text-foreground">
       <Navigation />
       <main className="flex-grow">
-        {/* Hero with Search */}
-        <BlogHeroRedesigned onSearchChange={handleSearchChange} />
+        {/* Hero with Search (Client Component) */}
+        <BlogHeroRedesigned />
 
-        {/* Category Filter Bar */}
-        <BlogCategoriesRedesigned
-          selectedCategory={selectedCategory}
-          onCategoryChange={handleCategoryChange}
-        />
+        {/* Category Filter Bar (Client Component) */}
+        <Suspense fallback={<CategoriesSkeleton />}>
+          <BlogCategoriesRedesigned
+            categories={categories}
+            selectedCategory={categorySlug}
+          />
+        </Suspense>
 
-        {/* Blog Cards Grid */}
-        <BlogGridRedesigned
-          searchQuery={searchQuery}
-          selectedCategory={selectedCategory}
-        />
+        {/* Blog Cards Grid (Client Component) */}
+        <Suspense fallback={<BlogGridSkeleton />}>
+          <BlogGridRedesigned posts={posts} />
+        </Suspense>
 
         {/* Newsletter Section */}
         {/* <BlogNewsletterRedesigned /> */}
-        {/* <GrowTogether /> */}
       </main>
       <Footer />
     </div>

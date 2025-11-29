@@ -48,7 +48,7 @@ const WORDPRESS_API_URL = process.env.NEXT_PUBLIC_WORDPRESS_API_URL;
 export async function getPosts(params?: {
   page?: number;
   per_page?: number;
-  categories?: string;
+  categories?: string | number;
   search?: string;
 }): Promise<{ posts: WordPressPost[]; totalPages: number }> {
   try {
@@ -61,7 +61,7 @@ export async function getPosts(params?: {
       _embed: "true",
       page: (params?.page || 1).toString(),
       per_page: (params?.per_page || 10).toString(),
-      ...(params?.categories && { categories: params.categories }),
+      ...(params?.categories && { categories: params.categories.toString() }),
       ...(params?.search && { search: params.search }),
     });
 
@@ -146,6 +146,14 @@ export async function getCategories(): Promise<WordPressCategory[]> {
     console.error("Error fetching WordPress categories:", error);
     return getMockCategories();
   }
+}
+
+export async function getCategoryIdBySlug(
+  slug: string
+): Promise<number | undefined> {
+  const categories = await getCategories();
+  const category = categories.find((cat) => cat.slug === slug);
+  return category?.id;
 }
 
 export async function getPostBySlug(
