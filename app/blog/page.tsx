@@ -8,14 +8,16 @@ import BlogGridRedesigned from "@/components/blog-grid-redesigned";
 import BlogCategoriesRedesigned from "@/components/blog-categories-redesigned";
 import GrowTogether from "@/components/grow-together";
 import BlogNewsletterRedesigned from "@/components/blog-newsletter-redesigned";
+import { useDebounce } from "@/hooks/use-debounce";
 
 export default function BlogPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>("");
   const [searchQuery, setSearchQuery] = useState<string>("");
+  const debouncedSearchQuery = useDebounce(searchQuery, 500);
 
   // ✅ useCallback prevents unnecessary re-renders of child components
-  const handleCategoryChange = (categorySlug: string) => {
-    setSelectedCategory(categorySlug);
+  const handleCategoryChange = (categoryId: string) => {
+    setSelectedCategory(categoryId);
   };
 
   const handleSearchChange = (query: string) => {
@@ -36,7 +38,7 @@ export default function BlogPage() {
 
         {/* Blog Cards Grid */}
         <BlogGridRedesigned
-          searchQuery={searchQuery}
+          searchQuery={debouncedSearchQuery}
           selectedCategory={selectedCategory}
         />
 

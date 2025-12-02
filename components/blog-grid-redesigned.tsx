@@ -15,8 +15,9 @@ import {
   formatDate,
   stripHtml,
   calculateReadTime,
+  type WordPressPost,
 } from "@/lib/wordpress";
-import { Suspense } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 interface BlogGridProps {
@@ -24,12 +25,33 @@ interface BlogGridProps {
   selectedCategory?: string;
 }
 
-async function BlogPosts({ searchQuery, selectedCategory }: BlogGridProps) {
-  const { posts } = await getPosts({
-    per_page: 12,
-    search: searchQuery,
-    categories: selectedCategory,
-  });
+function BlogPosts({ searchQuery, selectedCategory }: BlogGridProps) {
+  const [posts, setPosts] = useState<WordPressPost[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      setLoading(true);
+      try {
+        const { posts: fetchedPosts } = await getPosts({
+          per_page: 12,
+          search: searchQuery,
+          categories: selectedCategory,
+        });
+        setPosts(fetchedPosts);
+      } catch (error) {
+        console.error("Failed to fetch posts:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPosts();
+  }, [searchQuery, selectedCategory]);
+
+  if (loading) {
+    return <BlogGridSkeleton />;
+  }
 
   if (posts.length === 0) {
     return (
@@ -246,12 +268,10 @@ export default function BlogGridRedesigned({
   return (
     <section className="py-24 bg-blue-50/40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <Suspense fallback={<BlogGridSkeleton />}>
-          <BlogPosts
-            searchQuery={searchQuery}
-            selectedCategory={selectedCategory}
-          />
-        </Suspense>
+        <BlogPosts
+          searchQuery={searchQuery}
+          selectedCategory={selectedCategory}
+        />
 
         <div className="text-center mt-16">
           <Button
