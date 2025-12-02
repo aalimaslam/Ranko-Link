@@ -88,9 +88,9 @@ function BlogPosts({ searchQuery, selectedCategory }: BlogGridProps) {
           transition={{ duration: 0.6 }}
           className="mb-20"
         >
-          <div className="relative grid grid-cols-1 lg:grid-cols-2 rounded-3xl overflow-hidden shadow-[0_6px_24px_rgba(30,64,175,0.12)] border border-blue-100 bg-white">
+          <div className="relative grid grid-cols-1 lg:grid-cols-2 rounded-xl overflow-hidden shadow-[0_6px_24px_rgba(30,64,175,0.12)] border border-blue-100 bg-white">
             {/* IMAGE */}
-            <div className="relative overflow-hidden group h-[320px] lg:h-full">
+            <div className="relative overflow-hidden group h-[250px] lg:h-full">
               <img
                 src={
                   featuredPost._embedded?.["wp:featuredmedia"]?.[0]
@@ -122,7 +122,7 @@ function BlogPosts({ searchQuery, selectedCategory }: BlogGridProps) {
               </h2>
 
               <p className="text-blue-800/80 text-lg leading-relaxed">
-                {stripHtml(featuredPost.excerpt.rendered)}
+                {stripHtml(featuredPost.excerpt.rendered).slice(0, 100)}...
               </p>
 
               {/* Meta */}

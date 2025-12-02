@@ -63,7 +63,7 @@ export default function Footer() {
           <div className="space-y-6">
             <div className="flex items-center">
               <Image
-                src="/Rankolink-logo.svg"
+                src="/RankoLink-logo.svg"
                 width={180}
                 height={40}
                 alt="RankoLink Logo"
@@ -92,10 +92,15 @@ export default function Footer() {
             {/* Socials */}
             <div className="flex space-x-4 pt-2">
               {[
-                { icon: linkedinIcon, link: "https://linkedin.com" },
-                { icon: instagramIcon, link: "https://instagram.com" },
-                { icon: facebookIcon, link: "https://facebook.com" },
-                { icon: twitterIcon, link: "https://twitter.com" },
+                {
+                  icon: linkedinIcon,
+                  link: "https://www.linkedin.com/company/rankolink/about",
+                },
+                {
+                  icon: instagramIcon,
+                  link: "https://www.instagram.com/rankolink/",
+                },
+                { icon: twitterIcon, link: "https://x.com/rankolink03" },
               ].map((item, i) => (
                 <Link
                   key={i}

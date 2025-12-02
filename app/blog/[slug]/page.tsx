@@ -1,114 +1,177 @@
-import { notFound } from "next/navigation"
-import { getPostBySlug, formatDate, calculateReadTime, stripHtml } from "@/lib/wordpress"
-import Navigation from "@/components/navigation"
-import Footer from "@/components/footer"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Calendar, Clock, User, ArrowLeft } from "lucide-react"
-import Link from "next/link"
+import { notFound } from "next/navigation";
+import {
+  getPostBySlug,
+  formatDate,
+  calculateReadTime,
+  stripHtml,
+} from "@/lib/wordpress";
+import Navigation from "@/components/navigation";
+import Footer from "@/components/footer";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Calendar, Clock, User, ArrowLeft } from "lucide-react";
+import Link from "next/link";
+import BlogTOC from "@/components/blog-toc";
+import BlogCTA from "@/components/blog-cta";
 
 interface BlogPostPageProps {
   params: {
-    slug: string
-  }
+    slug: string;
+  };
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
-  const post = await getPostBySlug(params.slug)
+  const post = await getPostBySlug(params.slug);
 
   if (!post) {
-    notFound()
+    notFound();
   }
 
+  // Process content to add IDs to headings for TOC
+  // This is a simple server-side replacement. For more complex cases, use a parser.
+  let content = post.content.rendered;
+  let headingIndex = 0;
+  content = content.replace(
+    /<(h[23])([^>]*)>(.*?)<\/\1>/gi,
+    (match, tag, attrs, text) => {
+      const id = `heading-${headingIndex++}`;
+      // Add id and scroll-margin-top class for sticky header offset
+      // Check if class attribute exists
+      let newAttrs = attrs;
+      if (newAttrs.includes("class=")) {
+        newAttrs = newAttrs.replace(
+          /class=(["'])(.*?)\1/,
+          'class=$1$2 scroll-mt-32$1'
+        );
+      } else {
+        newAttrs += ' class="scroll-mt-32"';
+      }
+      return `<${tag} id="${id}"${newAttrs}>${text}</${tag}>`;
+    }
+  );
+
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-white">
       <Navigation />
       <main>
         {/* Hero Section */}
-        <section className="py-20 bg-gradient-to-br from-background via-muted/20 to-background">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="space-y-6">
-              <Button variant="ghost" asChild className="rounded-sm">
-                <Link href="/blog" className="flex items-center gap-2 text-muted-foreground hover:text-foreground">
-                  <ArrowLeft className="w-4 h-4" />
-                  Back to Blog
-                </Link>
-              </Button>
+        <section className="pt-32 pb-16 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              {/* Left: Content */}
+              <div className="space-y-8">
+                <div className="space-y-4">
+                  <div className="flex items-center gap-3">
+                    <Badge
+                      variant="outline"
+                      className="rounded-full px-3 py-1 border-blue-200 text-blue-700 bg-blue-50"
+                    >
+                      {calculateReadTime(post.content.rendered)}
+                    </Badge>
+                  </div>
 
-              {post._embedded?.["wp:term"]?.[0]?.[0] && (
-                <Badge variant="secondary" className="rounded-sm">
-                  {post._embedded["wp:term"][0][0].name}
-                </Badge>
-              )}
-
-              <h1 className="font-heading font-bold text-4xl lg:text-5xl text-foreground leading-tight">
-                {post.title.rendered}
-              </h1>
-
-              <div className="flex items-center gap-6 text-muted-foreground">
-                <div className="flex items-center gap-2">
-                  <User className="w-5 h-5" />
-                  <span>{post._embedded?.author?.[0]?.name || "RankoLink Team"}</span>
+                  <h1 className="font-heading font-bold text-4xl sm:text-5xl lg:text-6xl text-blue-950 leading-[1.1]">
+                    {post.title.rendered}
+                  </h1>
                 </div>
-                <div className="flex items-center gap-2">
-                  <Calendar className="w-5 h-5" />
-                  <span>{formatDate(post.date)}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Clock className="w-5 h-5" />
-                  <span>{calculateReadTime(post.content.rendered)}</span>
+
+                <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold text-lg">
+                      {post._embedded?.author?.[0]?.name?.charAt(0) || "R"}
+                    </div>
+                    <div>
+                      <p className="font-semibold text-blue-950">
+                        {post._embedded?.author?.[0]?.name || "RankoLink Team"}
+                      </p>
+                      <p className="text-sm text-muted-foreground">
+                        {formatDate(post.date)}
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
+
+              {/* Right: Image */}
+              {post._embedded?.["wp:featuredmedia"]?.[0] && (
+                <div className="relative aspect-[4/3] lg:aspect-square rounded-3xl overflow-hidden bg-green-400">
+                  <img
+                    src={
+                      post._embedded["wp:featuredmedia"][0].source_url ||
+                      "/placeholder.svg"
+                    }
+                    alt={
+                      post._embedded["wp:featuredmedia"][0].alt_text ||
+                      post.title.rendered
+                    }
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              )}
             </div>
           </div>
         </section>
 
-        {/* Featured Image */}
-        {post._embedded?.["wp:featuredmedia"]?.[0] && (
-          <section className="py-8">
-            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="aspect-video overflow-hidden rounded-lg">
-                <img
-                  src={post._embedded["wp:featuredmedia"][0].source_url || "/placeholder.svg"}
-                  alt={post._embedded["wp:featuredmedia"][0].alt_text || post.title.rendered}
-                  className="w-full h-full object-cover"
+        {/* Content Section */}
+        <section className="py-12 lg:py-20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+              {/* Left Sidebar: TOC */}
+              <div className="hidden lg:block lg:col-span-4 bg-blue-100 p-4 rounded-2xl">
+                <BlogTOC content={content} />
+              </div>
+
+              {/* Main Content */}
+              <div className="lg:col-span-8">
+                <div
+                  className="prose prose-lg max-w-none 
+                    prose-headings:font-heading prose-headings:font-bold prose-headings:text-blue-950 
+                    prose-p:text-slate-600 prose-p:leading-relaxed
+                    prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline
+                    prose-strong:text-blue-900
+                    prose-li:text-slate-600
+                    prose-img:rounded-2xl prose-img:shadow-lg"
+                  dangerouslySetInnerHTML={{ __html: content }}
                 />
               </div>
-            </div>
-          </section>
-        )}
 
-        {/* Content */}
-        <section className="py-12">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div
-              className="prose prose-lg max-w-none prose-headings:font-heading prose-headings:text-foreground prose-p:text-muted-foreground prose-a:text-primary prose-strong:text-foreground"
-              dangerouslySetInnerHTML={{ __html: post.content.rendered }}
-            />
+              {/* Right Sidebar: CTA */}
+              {/* <div className="lg:col-span-3">
+                <BlogCTA />
+              </div> */}
+            </div>
           </div>
         </section>
 
         {/* Back to Blog */}
-        <section className="py-12 border-t border-border">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <Button asChild size="lg" className="rounded-sm">
-              <Link href="/blog">View More Articles</Link>
+        <section className="py-12 border-t border-blue-100">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <Button
+              asChild
+              variant="outline"
+              size="lg"
+              className="rounded-full border-blue-200 text-blue-700 hover:bg-blue-50"
+            >
+              <Link href="/blog" className="flex items-center gap-2">
+                <ArrowLeft className="w-4 h-4" />
+                Back to Blog
+              </Link>
             </Button>
           </div>
         </section>
       </main>
       <Footer />
     </div>
-  )
+  );
 }
 
 export async function generateMetadata({ params }: BlogPostPageProps) {
-  const post = await getPostBySlug(params.slug)
+  const post = await getPostBySlug(params.slug);
 
   if (!post) {
     return {
       title: "Post Not Found",
-    }
+    };
   }
 
   return {
@@ -121,5 +184,6 @@ export async function generateMetadata({ params }: BlogPostPageProps) {
         ? [post._embedded["wp:featuredmedia"][0].source_url]
         : [],
     },
-  }
+  };
 }
+
