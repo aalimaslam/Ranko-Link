@@ -50,6 +50,7 @@ export async function getPosts(params?: {
   per_page?: number;
   categories?: string;
   search?: string;
+  fields?: string[];
 }): Promise<{ posts: WordPressPost[]; totalPages: number }> {
   try {
     if (!WORDPRESS_API_URL) {
@@ -63,6 +64,7 @@ export async function getPosts(params?: {
       per_page: (params?.per_page || 10).toString(),
       ...(params?.categories && { categories: params.categories }),
       ...(params?.search && { search: params.search }),
+      ...(params?.fields && { _fields: params.fields.join(",") }),
     });
 
     console.log(
@@ -217,6 +219,7 @@ function getMockPosts(params?: {
   per_page?: number;
   categories?: string;
   search?: string;
+  fields?: string[];
 }): { posts: WordPressPost[]; totalPages: number } {
   const mockPosts: WordPressPost[] = [
     {
