@@ -7,6 +7,14 @@ import AboutMissionVisionRedesigned from "@/components/about-mission-vision-rede
 import AboutWhatMakesUsDifferentRedesigned from "@/components/about-what-makes-us-different-redesigned";
 import AboutFounderStoryRedesigned from "@/components/about-founder-story-redesigned";
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "About Rankolink | Your SEO & Link Building Partner",
+  description:
+    "We're a team of SEO experts dedicated to helping you achieve higher rankings. Learn more about our mission to provide transparent, results-focused link building services for sustainable growth.",
+};
+
 export default function AboutPage() {
   return (
     <div className="min-h-screen">

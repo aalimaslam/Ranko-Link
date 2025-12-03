@@ -13,6 +13,7 @@ import { Calendar, Clock, User, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import BlogTOC from "@/components/blog-toc";
 import BlogCTA from "@/components/blog-cta";
+import ScrollTracker from "@/components/ui/scroll-tracker";
 
 interface BlogPostPageProps {
   params: {
@@ -53,6 +54,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   return (
     <div className="min-h-screen bg-white">
       <Navigation />
+      <ScrollTracker />
       <main>
         {/* Hero Section */}
         <section className="pt-32 pb-16 bg-white">
