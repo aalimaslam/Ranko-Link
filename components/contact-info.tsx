@@ -1,5 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card"
-import { Mail, Phone, MapPin, Clock, MessageCircle, Calendar } from "lucide-react"
+import { Mail, Phone, MapPin, Clock, Calendar } from "lucide-react"
 
 export default function ContactInfo() {
   const contactMethods = [
@@ -16,13 +16,6 @@ export default function ContactInfo() {
       description: "Speak with our SEO experts",
       contact: "+1 (555) 123-4567",
       action: "tel:+15551234567",
-    },
-    {
-      icon: MessageCircle,
-      title: "Live Chat",
-      description: "Chat with our support team",
-      contact: "Available 9 AM - 6 PM EST",
-      action: "#",
     },
     {
       icon: Calendar,
@@ -50,7 +43,7 @@ export default function ContactInfo() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {contactMethods.map((method, index) => (
             <Card key={index} className="border-border bg-background hover:shadow-md transition-shadow duration-200">
               <CardContent className="p-6">

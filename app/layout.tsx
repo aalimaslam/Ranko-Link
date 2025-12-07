@@ -1,29 +1,20 @@
 import type React from "react";
 import type { Metadata } from "next";
-import { Inter, Poppins } from "next/font/google";
+import { Manrope } from "next/font/google";
 import "./globals.css";
 import SmoothScrollProvider from "@/components/smooth-scroll-provider";
-import WhatsAppWidget from "@/components/ui/whatsapppWidget";
 
-const inter = Inter({
+const manrope = Manrope({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-inter",
-  weight: ["400", "500", "600"],
-});
-
-const poppins = Poppins({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-poppins",
-  weight: ["400", "500", "600", "700"],
+  variable: "--font-manrope",
 });
 
 export const metadata: Metadata = {
   title: "RankoLink - Premium SEO & Link Building Agency",
   description:
     "RankoLink delivers high-quality, white-hat backlinks that drive measurable traffic, leads, and long-term SEO results.",
-  generator: "v0.app",
+  generator: "Ranko link",
   icons: {
     icon: "/R-logo.png",
   },
@@ -37,10 +28,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`font-sans ${inter.variable} ${poppins.variable} antialiased`}
+        className={`font-sans ${manrope.variable} antialiased`}
       >
         <SmoothScrollProvider>{children}</SmoothScrollProvider>
-        <WhatsAppWidget />
       </body>
     </html>
   );

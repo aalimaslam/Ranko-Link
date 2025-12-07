@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 import { ArrowRight, Award } from "lucide-react";
 import TextType from "./ui/text-type";
@@ -85,15 +86,21 @@ export default function FancyHeroSection() {
 
           {/* CTA Buttons */}
           <div className="flex flex-wrap gap-4">
-            <button className="group px-4 py-3 text-lg font-medium text-white rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 shadow-md transition-all hover:shadow-lg hover:scale-[1.03]">
+            <Link
+              href="/contact"
+              className="group px-4 py-3 text-lg font-medium text-white rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 shadow-md transition-all hover:shadow-lg hover:scale-[1.03]"
+            >
               <span className="flex items-center gap-2">
                 Get In Touch
                 <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
               </span>
-            </button>
-            <button className="px-4 py-3 text-lg font-medium text-gray-700 bg-white/80 border border-gray-200 rounded-xl shadow-sm hover:border-blue-300 hover:text-blue-600 transition-all">
+            </Link>
+            <Link
+              href="/services"
+              className="flex items-center justify-center px-4 py-3 text-lg font-medium text-gray-700 bg-white/80 border border-gray-200 rounded-xl shadow-sm hover:border-blue-300 hover:text-blue-600 transition-all"
+            >
               View Our Work
-            </button>
+            </Link>
           </div>
           {/* Stats Section Below */}
           <div className="mt-16">

@@ -1,12 +1,12 @@
 "use client";
 
 import { Card, CardContent } from "@/components/ui/card";
-import {
+import 
+{
   Mail,
   Phone,
   MapPin,
   Clock,
-  MessageCircle,
   Calendar,
 } from "lucide-react";
 import { motion } from "framer-motion";
@@ -26,13 +26,6 @@ export default function ContactInfoCompact() {
       description: "Speak with our SEO experts",
       contact: "+1 (555) 123-4567",
       action: "tel:+15551234567",
-    },
-    {
-      icon: MessageCircle,
-      title: "Live Chat",
-      description: "Chat with our support team",
-      contact: "Available 9 AM - 6 PM EST",
-      action: "#",
     },
     {
       icon: Calendar,

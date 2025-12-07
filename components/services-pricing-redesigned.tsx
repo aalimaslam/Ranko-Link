@@ -70,13 +70,14 @@ export default function ServicesPricingRedesigned() {
 
                   <Button
                     size="lg"
+                    asChild
                     className={`w-full mt-6 text-lg font-semibold ${
                       plan.popular
                         ? "bg-white text-blue-700 hover:bg-blue-50"
                         : "bg-blue-600/40 text-white border border-blue-300/40 hover:bg-blue-600/60"
                     } rounded-xl py-6 transition-all`}
                   >
-                    <Link  href="/pricing">
+                    <Link  href="/contact">
                     Get Started
                     </Link>
                   </Button>
@@ -100,7 +101,7 @@ export default function ServicesPricingRedesigned() {
                 size="lg"
                 className="bg-white text-blue-700 hover:bg-blue-50 text-lg px-8 py-6 rounded-xl font-semibold shadow-md transition-transform hover:scale-105"
               >
-                <Link href="/pricing" className="flex items-center gap-2">
+                <Link href="/contact" className="flex items-center gap-2">
                   Compare Pricing Plans
                   <ArrowRight className="w-5 h-5" />
                 </Link>

@@ -60,13 +60,13 @@ export default function PricingHeroRedesigned() {
               <ArrowRight className="w-5 h-5" />
             </Link>
           </Button>
-          <Button
-            variant="outline"
-            size="lg"
-            className="text-lg px-8 py-6 rounded-xl border-2 hover:text-blue-600 border-blue-400 hover:bg-blue-50 transition-all duration-300"
+          <Link
+            href="https://calendly.com/"
+            target="_blank"
+            className="inline-flex items-center justify-center text-lg px-8 py-6 rounded-xl border-2 hover:text-blue-600 border-blue-400 hover:bg-blue-50 transition-all duration-300 font-medium"
           >
             Schedule Consultation
-          </Button>
+          </Link>
         </motion.div>
       </div>
     </motion.section>

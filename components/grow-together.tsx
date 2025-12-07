@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 export default function TrafficCTASection() {
   const handleBookCall = () => {
     alert("Booking functionality would be integrated here!");
@@ -36,12 +37,13 @@ export default function TrafficCTASection() {
             <div className="w-10 h-16 bg-blue-100 rounded-lg transform -skew-x-12"></div>
           </div>
 
-          <button
-            onClick={handleBookCall}
+          <Link
+            href="https://calendly.com/"
+            target="_blank"
             className="bg-black text-white px-10 py-4 rounded-full text-base font-semibold transition-all duration-300 hover:bg-gray-800 hover:-translate-y-1 hover:shadow-xl active:translate-y-0"
           >
             Book a call
-          </button>
+          </Link>
         </div>
       </div>
     </div>

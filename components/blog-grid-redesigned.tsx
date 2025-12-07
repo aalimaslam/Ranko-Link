@@ -88,13 +88,16 @@ function BlogPosts({ searchQuery, selectedCategory }: BlogGridProps) {
           transition={{ duration: 0.6 }}
           className="mb-20"
         >
-          <div className="relative grid grid-cols-1 lg:grid-cols-2 rounded-xl overflow-hidden shadow-[0_6px_24px_rgba(30,64,175,0.12)] border border-blue-100 bg-white">
+          <div className="relative grid grid-cols-1 lg:grid-cols-2 rounded-xl overflow-hidden shadow-[0_6px_24px_rgba(30,64,175,0.12)] border border-blue-100 bg-white group">
             {/* IMAGE */}
-            <div className="relative overflow-hidden group h-[250px] lg:h-full">
+            <Link
+              href={`/blog/${featuredPost.slug}`}
+              className="relative overflow-hidden h-[250px] lg:h-full block"
+            >
               <img
                 src={
-                  featuredPost._embedded?.["wp:featuredmedia"]?.[0]
-                    ?.source_url || "/placeholder.svg"
+                  featuredPost._embedded?.["wp:featuredmedia"]?.[0]?.source_url ||
+                  "/placeholder.svg"
                 }
                 alt={
                   featuredPost._embedded?.["wp:featuredmedia"]?.[0]?.alt_text ||
@@ -105,32 +108,33 @@ function BlogPosts({ searchQuery, selectedCategory }: BlogGridProps) {
 
               {/* Category Badge */}
               {featuredPost._embedded?.["wp:term"]?.[0]?.[0] && (
-                <Badge className="absolute top-6 left-6 bg-blue-600 text-white shadow-lg px-4 py-1.5 text-sm rounded-full">
+                <Badge className="absolute top-6 left-6 bg-blue-600 text-white shadow-lg px-4 py-1.5 text-sm rounded-full pointer-events-none">
                   {featuredPost._embedded["wp:term"][0][0].name}
                 </Badge>
               )}
-            </div>
+            </Link>
 
             {/* CONTENT */}
             <div className="p-10 flex flex-col justify-center space-y-5">
-              <Badge className="bg-blue-700 text-white text-xs w-fit rounded-full px-3 py-1">
-                Featured Article
-              </Badge>
+              <Link href={`/blog/${featuredPost.slug}`} className="block">
+                <Badge className="bg-blue-700 text-white text-xs w-fit rounded-full px-3 py-1 mb-3 pointer-events-none">
+                  Featured Article
+                </Badge>
 
-              <h2 className="font-heading font-bold text-4xl text-blue-950 leading-snug">
-                {featuredPost.title.rendered}
-              </h2>
+                <h2 className="font-heading font-bold text-4xl text-blue-950 leading-snug group-hover:text-blue-700 transition-colors">
+                  {featuredPost.title.rendered}
+                </h2>
 
-              <p className="text-blue-800/80 text-lg leading-relaxed">
-                {stripHtml(featuredPost.excerpt.rendered).slice(0, 100)}...
-              </p>
+                <p className="text-blue-800/80 text-lg leading-relaxed mt-4">
+                  {stripHtml(featuredPost.excerpt.rendered).slice(0, 100)}...
+                </p>
+              </Link>
 
               {/* Meta */}
               <div className="flex items-center flex-wrap gap-5 text-sm text-blue-700/70 pt-2">
                 <div className="flex items-center gap-1">
                   <User className="w-4 h-4" />
-                  {featuredPost._embedded?.author?.[0]?.name ||
-                    "RankoLink Team"}
+                  {featuredPost._embedded?.author?.[0]?.name || "RankoLink Team"}
                 </div>
                 <div className="flex items-center gap-1">
                   <Calendar className="w-4 h-4" />
@@ -141,18 +145,6 @@ function BlogPosts({ searchQuery, selectedCategory }: BlogGridProps) {
                   {calculateReadTime(featuredPost.content.rendered)}
                 </div>
               </div>
-
-              <Button
-                asChild
-                className="w-fit mt-1 bg-blue-600 hover:bg-blue-700 text-white rounded-xl px-6 py-2"
-              >
-                <Link
-                  href={`/blog/${featuredPost.slug}`}
-                  className="flex items-center gap-2"
-                >
-                  Read Article <ArrowRight className="w-4 h-4" />
-                </Link>
-              </Button>
             </div>
           </div>
         </motion.div>
@@ -169,71 +161,60 @@ function BlogPosts({ searchQuery, selectedCategory }: BlogGridProps) {
             viewport={{ once: true }}
             variants={cardVariants}
           >
-            <Card
-              className="
+            <Link href={`/blog/${post.slug}`} className="block h-full group">
+              <Card
+                className="
               rounded-2xl overflow-hidden
               border border-blue-100
               bg-white shadow-sm
               hover:shadow-[0_6px_20px_rgba(30,64,175,0.15)]
               transition-all duration-300 h-full
             "
-            >
-              {/* Image */}
-              <div className="relative aspect-video overflow-hidden group">
-                <img
-                  src={
-                    post._embedded?.["wp:featuredmedia"]?.[0]?.source_url ||
-                    "/placeholder.svg"
-                  }
-                  alt={
-                    post._embedded?.["wp:featuredmedia"]?.[0]?.alt_text ||
-                    post.title.rendered
-                  }
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
+              >
+                {/* Image */}
+                <div className="relative aspect-video overflow-hidden">
+                  <img
+                    src={
+                      post._embedded?.["wp:featuredmedia"]?.[0]?.source_url ||
+                      "/placeholder.svg"
+                    }
+                    alt={
+                      post._embedded?.["wp:featuredmedia"]?.[0]?.alt_text ||
+                      post.title.rendered
+                    }
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
 
-                {/* Category */}
-                {post._embedded?.["wp:term"]?.[0]?.[0] && (
-                  <Badge className="absolute top-4 left-4 bg-white/90 border border-blue-200 text-blue-700 text-xs rounded-full px-3 py-1 shadow-sm">
-                    {post._embedded["wp:term"][0][0].name}
-                  </Badge>
-                )}
-              </div>
-
-              <CardHeader className="p-6 space-y-3">
-                <CardTitle className="font-heading font-semibold text-xl text-blue-950 hover:text-blue-700 transition-colors">
-                  {post.title.rendered}
-                </CardTitle>
-              </CardHeader>
-
-              <CardContent className="px-6 pb-6 space-y-5">
-                {/* Meta */}
-                <div className="flex flex-wrap items-center gap-4 text-sm text-blue-700/70">
-                  <div className="flex items-center gap-1">
-                    <User className="w-4 h-4" />
-                    {post._embedded?.author?.[0]?.name || "RankoLink Team"}
-                  </div>
-
-                  <div className="flex items-center gap-1">
-                    <Calendar className="w-4 h-4" />
-                    {formatDate(post.date)}
-                  </div>
+                  {/* Category */}
+                  {post._embedded?.["wp:term"]?.[0]?.[0] && (
+                    <Badge className="absolute top-4 left-4 bg-white/90 border border-blue-200 text-blue-700 text-xs rounded-full px-3 py-1 shadow-sm">
+                      {post._embedded["wp:term"][0][0].name}
+                    </Badge>
+                  )}
                 </div>
 
-                <Button
-                  variant="outline"
-                  asChild
-                  className="w-full border-blue-200 text-blue-700 bg-white hover:bg-blue-50 hover:border-blue-400 rounded-xl py-2 font-medium"
-                >
-                  <Link
-                    href={`/blog/${post.slug}`}
-                    className="flex items-center justify-center gap-2"
-                  >
-                    Read More <ArrowRight className="w-4 h-4" />
-                  </Link>
-                </Button>
-              </CardContent>
-            </Card>
+                <CardHeader className="p-6 space-y-3">
+                  <CardTitle className="font-heading font-semibold text-xl text-blue-950 hover:text-blue-700 transition-colors">
+                    {post.title.rendered}
+                  </CardTitle>
+                </CardHeader>
+
+                <CardContent className="px-6 pb-6 space-y-5">
+                  {/* Meta */}
+                  <div className="flex flex-wrap items-center gap-4 text-sm text-blue-700/70">
+                    <div className="flex items-center gap-1">
+                      <User className="w-4 h-4" />
+                      {post._embedded?.author?.[0]?.name || "RankoLink Team"}
+                    </div>
+
+                    <div className="flex items-center gap-1">
+                      <Calendar className="w-4 h-4" />
+                      {formatDate(post.date)}
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
           </motion.div>
         ))}
       </div>

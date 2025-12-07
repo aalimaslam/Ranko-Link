@@ -62,13 +62,12 @@ export default function ServicesHeroRedesigned() {
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-blue-600 opacity-0 group-hover:opacity-20 blur-2xl transition duration-500" />
               </Link>
             </Button>
-            <Button
-              variant="outline"
-              size="lg"
+            <Link
+              href="/services#case-studies"
               className="relative rounded-2xl border-2 border-blue-500/40 px-8 py-6 text-lg font-semibold text-blue-700 dark:text-blue-300 bg-white/30 dark:bg-slate-800/40 backdrop-blur-md transition-all duration-300 hover:bg-blue-100/40 dark:hover:bg-slate-700/50 hover:border-blue-500 hover:scale-105"
             >
               <span className="relative z-10">View Case Studies</span>
-            </Button>
+            </Link>
           </motion.div>
         </div>
       </div>

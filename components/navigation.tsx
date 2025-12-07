@@ -10,11 +10,13 @@ import {
   useScroll,
   useMotionValueEvent,
 } from "framer-motion";
+import { usePathname } from "next/navigation";
 import Logo from "@/public/RankoLink-logo.svg";
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const navRef = useRef<HTMLElement>(null);
+  const pathname = usePathname();
 
   const { scrollY } = useScroll();
 
@@ -91,22 +93,30 @@ export default function Navigation() {
 
           {/* DESKTOP NAV */}
           <div className="hidden lg:flex items-center space-x-7">
-            {navItems.map((item) => (
-              <motion.div
-                key={item.name}
-                initial={{ opacity: 0, y: -8 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.35 }}
-              >
+            {navItems.map((item) => {
+              const isActive = pathname === item.href;
+              return (
                 <Link
+                  key={item.name}
                   href={item.href}
-                  className="relative text-[15px] font-medium text-gray-700 hover:text-blue-600 transition"
+                  className={`relative text-[15px] font-medium transition hover:text-blue-600 ${
+                    isActive ? "text-blue-600" : "text-gray-700"
+                  }`}
                 >
                   {item.name}
-                  <span className="absolute -bottom-1 left-0 h-[2px] bg-blue-500 w-0 group-hover:w-full transition-all"></span>
+                  {isActive && (
+                    <motion.span
+                      layoutId="active-nav-underline"
+                      className="absolute -bottom-1 left-0 h-[2px] bg-blue-500 w-full"
+                      transition={{ type: "spring", stiffness: 350, damping: 30 }}
+                    />
+                  )}
+                  {!isActive && (
+                     <span className="absolute -bottom-1 left-0 h-[2px] bg-blue-500 w-0 hover:w-full transition-all duration-300 group-hover:w-full"></span>
+                  )}
                 </Link>
-              </motion.div>
-            ))}
+              );
+            })}
 
             <Button
               className="bg-gradient-to-br from-blue-500 to-blue-700 text-white rounded-full px-6 py-2 hover:scale-[1.04] transition"

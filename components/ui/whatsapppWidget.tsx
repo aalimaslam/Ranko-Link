@@ -18,7 +18,7 @@ export default function EmailWidget() {
   if (!isVisible) return null;
 
   return (
-    <div className="fixed bottom-8 right-8 z-50 animate-slideIn">
+    <div className="fixed bottom-4 right-4 md:bottom-8 md:right-8 z-50 animate-slideIn">
       <div className="relative">
         {/* Close button - Premium style */}
         <button
