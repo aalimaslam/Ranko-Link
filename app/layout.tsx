@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
 import "./globals.css";
 import SmoothScrollProvider from "@/components/smooth-scroll-provider";
+import WhatsAppWidget from "@/components/whatsapp-widget";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -30,7 +31,10 @@ export default function RootLayout({
       <body
         className={`font-sans ${manrope.variable} antialiased`}
       >
-        <SmoothScrollProvider>{children}</SmoothScrollProvider>
+        <SmoothScrollProvider>
+          {children}
+          <WhatsAppWidget />
+        </SmoothScrollProvider>
       </body>
     </html>
   );

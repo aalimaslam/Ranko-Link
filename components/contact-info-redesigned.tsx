@@ -8,6 +8,7 @@ import
   MapPin,
   Clock,
   Calendar,
+  MessageCircle,
 } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -17,15 +18,22 @@ export default function ContactInfoCompact() {
       icon: Mail,
       title: "Email Us",
       description: "Get a response within 24 hours",
-      contact: "hello@rankolink.com",
-      action: "mailto:hello@rankolink.com",
+      contact: "adnandandroo322@gmail.com",
+      action: "mailto:adnandandroo322@gmail.com",
     },
     {
       icon: Phone,
       title: "Call Us",
       description: "Speak with our SEO experts",
-      contact: "+1 (555) 123-4567",
-      action: "tel:+15551234567",
+      contact: "+91 6006351087",
+      action: "tel:+916006351087",
+    },
+    {
+      icon: MessageCircle,
+      title: "Live Chat",
+      description: "Chat with our team on WhatsApp",
+      contact: "Chat Now",
+      action: "https://wa.me/916006351087",
     },
     {
       icon: Calendar,
@@ -37,9 +45,8 @@ export default function ContactInfoCompact() {
   ];
 
   const businessHours = [
-    { day: "Monday - Friday", hours: "9:00 AM - 6:00 PM EST" },
-    { day: "Saturday", hours: "10:00 AM - 4:00 PM EST" },
-    { day: "Sunday", hours: "Closed" },
+    { day: "Monday - Friday", hours: "10:00 AM - 6:00 PM" },
+    { day: "Saturday - Sunday", hours: "Closed" },
   ];
 
   const fadeUp = {
@@ -222,9 +229,9 @@ export default function ContactInfoCompact() {
                 </h3>
 
                 <p className="text-sm text-indigo-800/70 leading-relaxed">
-                  123 SEO Street <br />
-                  Digital Marketing District <br />
-                  New York, NY 10001
+                  Shalteng, Srinagar, Kashmir <br />
+                  Near Noora Hospital <br />
+                  190012
                 </p>
               </div>
             </CardContent>
