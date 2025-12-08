@@ -38,7 +38,7 @@ export default function TrafficCTASection() {
           </div>
 
           <Link
-            href="https://calendly.com/"
+            href="https://calendly.com/adnan-redstaglabs"
             target="_blank"
             className="bg-black text-white px-10 py-4 rounded-full text-base font-semibold transition-all duration-300 hover:bg-gray-800 hover:-translate-y-1 hover:shadow-xl active:translate-y-0"
           >

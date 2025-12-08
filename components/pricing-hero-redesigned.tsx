@@ -61,7 +61,7 @@ export default function PricingHeroRedesigned() {
             </Link>
           </Button>
           <Link
-            href="https://calendly.com/"
+            href="https://calendly.com/adnan-redstaglabs"
             target="_blank"
             className="inline-flex items-center justify-center text-lg px-8 py-6 rounded-xl border-2 hover:text-blue-600 border-blue-400 hover:bg-blue-50 transition-all duration-300 font-medium"
           >
