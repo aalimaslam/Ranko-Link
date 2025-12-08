@@ -18,7 +18,7 @@ export default function ContactPage() {
       <Navigation />
       <main>
         <ContactHeroRedesigned />
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
+        <div id="contact-section" className="grid grid-cols-1 lg:grid-cols-2 gap-0">
           <ContactFormRedesigned />
           <ContactInfoRedesigned />
         </div>

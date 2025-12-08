@@ -22,7 +22,7 @@ export default function BlogTOC({ content }: BlogTOCProps) {
     // Parse content to find headings
     const parser = new DOMParser();
     const doc = parser.parseFromString(content, "text/html");
-    const elements = doc.querySelectorAll("h2, h3");
+    const elements = doc.querySelectorAll("h2");
 
     const items: TOCItem[] = Array.from(elements).map((element, index) => {
       const id = element.id || `heading-${index}`;
@@ -58,7 +58,7 @@ export default function BlogTOC({ content }: BlogTOCProps) {
       observerOptions
     );
 
-    const headingElements = document.querySelectorAll("h2, h3");
+    const headingElements = document.querySelectorAll("h2");
     headingElements.forEach((element) => observer.observe(element));
 
     return () => observer.disconnect();

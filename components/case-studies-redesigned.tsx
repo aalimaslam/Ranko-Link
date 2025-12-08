@@ -63,7 +63,7 @@ export default function CaseStudiesRedesigned() {
   }
 
   return (
-    <section className="relative py-20 bg-gradient-to-b from-gray-50 via-white to-gray-100/50 overflow-hidden">
+    <section id="case-studies" className="relative py-20 bg-gradient-to-b from-gray-50 via-white to-gray-100/50 overflow-hidden">
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-24 left-10 w-64 h-64 bg-gray-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30"></div>
         <div className="absolute bottom-20 right-10 w-80 h-80 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-25"></div>

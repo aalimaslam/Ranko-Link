@@ -12,8 +12,25 @@ export default function PrivacyPage() {
     <div className="min-h-screen flex flex-col">
       <Navigation />
 
-      <main className="flex-grow max-w-4xl mx-auto px-6 py-12">
-        <h1 className="text-4xl font-bold mb-6">Privacy Policy</h1>
+      <main className="flex-grow">
+        <div className="relative bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 py-24 mb-16 overflow-hidden min-h-[50vh] flex items-center justify-center">
+          <div className="absolute inset-0 opacity-20">
+            <div className="absolute -top-24 -left-24 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl animate-blob"></div>
+            <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-indigo-500 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-2000"></div>
+          </div>
+          <div className="relative max-w-4xl mx-auto px-6 text-center z-10">
+            <span className="inline-block py-1 px-3 rounded-full bg-blue-800/50 border border-blue-700 text-blue-200 text-sm font-semibold mb-6 backdrop-blur-sm">
+              Legal
+            </span>
+            <h1 className="font-heading font-bold text-5xl md:text-6xl text-white mb-6 tracking-tight">
+              Privacy Policy
+            </h1>
+            <p className="text-xl text-blue-100 max-w-2xl mx-auto leading-relaxed">
+              We are committed to protecting your personal data and ensuring transparency in how we handle your information.
+            </p>
+          </div>
+        </div>
+        <div className="max-w-4xl mx-auto px-6 pb-12">
 
         <div className="prose prose-blue max-w-none">
           <p>Last updated: {new Date().toLocaleDateString()}</p>
@@ -120,6 +137,7 @@ export default function PrivacyPage() {
           <p><strong>Email:</strong> info@rankolink.com</p>
 
           <p>© {new Date().getFullYear()} RankoLink. All rights reserved.</p>
+        </div>
         </div>
       </main>
 

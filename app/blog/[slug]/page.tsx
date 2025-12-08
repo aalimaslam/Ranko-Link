@@ -14,6 +14,8 @@ import Link from "next/link";
 import BlogTOC from "@/components/blog-toc";
 import BlogCTA from "@/components/blog-cta";
 import ScrollTracker from "@/components/ui/scroll-tracker";
+import BlogAuthor from "@/components/blog-author";
+import SimilarBlogs from "@/components/similar-blogs";
 
 interface BlogPostPageProps {
   params: {
@@ -33,7 +35,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   let content = post.content.rendered;
   let headingIndex = 0;
   content = content.replace(
-    /<(h[23])([^>]*)>(.*?)<\/\1>/gi,
+    /<(h[2])([^>]*)>(.*?)<\/\1>/gi,
     (match, tag, attrs, text) => {
       const id = `heading-${headingIndex++}`;
       // Add id and scroll-margin-top class for sticky header offset
@@ -57,57 +59,53 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       <ScrollTracker />
       <main>
         {/* Hero Section */}
-        <section className="pt-32 pb-16 bg-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <section className="min-h-[60vh] flex items-center pt-24 pb-12 bg-[#f5f5f5]">
+          <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
               {/* Left: Content */}
-              <div className="space-y-8">
-                <div className="space-y-4">
-                  <div className="flex items-center gap-3">
-                    <Badge
-                      variant="outline"
-                      className="rounded-full px-3 py-1 border-blue-200 text-blue-700 bg-blue-50"
-                    >
-                      {calculateReadTime(post.content.rendered)}
-                    </Badge>
+              <div className="flex-1 space-y-6">
+                <Badge
+                  variant="outline"
+                  className="rounded-full px-3 py-1 border-blue-200 text-blue-700 bg-blue-50 w-fit"
+                >
+                  {calculateReadTime(post.content.rendered)}
+                </Badge>
+
+                <h1 className="font-heading font-bold text-4xl sm:text-5xl lg:text-5xl text-blue-950 leading-[1.1]">
+                  {post.title.rendered}
+                </h1>
+
+                <div className="flex items-center gap-3 pt-2">
+                  <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold text-lg shrink-0">
+                    {post._embedded?.author?.[0]?.name?.charAt(0) || "R"}
                   </div>
-
-                  <h1 className="font-heading font-bold text-4xl sm:text-5xl lg:text-6xl text-blue-950 leading-[1.1]">
-                    {post.title.rendered}
-                  </h1>
-                </div>
-
-                <div className="flex items-center gap-4">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold text-lg">
-                      {post._embedded?.author?.[0]?.name?.charAt(0) || "R"}
-                    </div>
-                    <div>
-                      <p className="font-semibold text-blue-950">
-                        {post._embedded?.author?.[0]?.name || "RankoLink Team"}
-                      </p>
-                      <p className="text-sm text-muted-foreground">
-                        {formatDate(post.date)}
-                      </p>
-                    </div>
+                  <div>
+                    <p className="font-semibold text-blue-950">
+                      {post._embedded?.author?.[0]?.name || "RankoLink Team"}
+                    </p>
+                    <p className="text-sm text-muted-foreground">
+                      {formatDate(post.date)}
+                    </p>
                   </div>
                 </div>
               </div>
 
               {/* Right: Image */}
               {post._embedded?.["wp:featuredmedia"]?.[0] && (
-                <div className="relative aspect-[4/3] lg:aspect-square rounded-3xl overflow-hidden bg-green-400">
-                  <img
-                    src={
-                      post._embedded["wp:featuredmedia"][0].source_url ||
-                      "/placeholder.svg"
-                    }
-                    alt={
-                      post._embedded["wp:featuredmedia"][0].alt_text ||
-                      post.title.rendered
-                    }
-                    className="w-full h-full object-cover"
-                  />
+                <div className="flex-1 w-full lg:max-w-xl">
+                  <div className="relative aspect-[16/10] rounded-3xl overflow-hidden shadow-sm">
+                    <img
+                      src={
+                        post._embedded["wp:featuredmedia"][0].source_url ||
+                        "/placeholder.svg"
+                      }
+                      alt={
+                        post._embedded["wp:featuredmedia"][0].alt_text ||
+                        post.title.rendered
+                      }
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
                 </div>
               )}
             </div>
@@ -135,30 +133,21 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                     prose-img:rounded-2xl prose-img:shadow-lg"
                   dangerouslySetInnerHTML={{ __html: content }}
                 />
+
+                {/* Author Profile */}
+                <div className="mt-8">
+                   <BlogAuthor 
+                      author={{
+                        name: post._embedded?.author?.[0]?.name || "RankoLink Team",
+                        avatar_url: post._embedded?.author?.[0]?.avatar_urls?.["96"]
+                      }}
+                   />
+                </div>
               </div>
-
-              {/* Right Sidebar: CTA */}
-              {/* <div className="lg:col-span-3">
-                <BlogCTA />
-              </div> */}
             </div>
-          </div>
-        </section>
 
-        {/* Back to Blog */}
-        <section className="py-12 border-t border-blue-100">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <Button
-              asChild
-              variant="outline"
-              size="lg"
-              className="rounded-full border-blue-200 text-blue-700 hover:bg-blue-50"
-            >
-              <Link href="/blog" className="flex items-center gap-2">
-                <ArrowLeft className="w-4 h-4" />
-                Back to Blog
-              </Link>
-            </Button>
+            {/* Similar Blogs */}
+            <SimilarBlogs currentPostId={post.id} categories={post.categories} />
           </div>
         </section>
       </main>

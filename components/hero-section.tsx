@@ -87,7 +87,7 @@ export default function FancyHeroSection() {
           {/* CTA Buttons */}
           <div className="flex flex-wrap gap-4">
             <Link
-              href="/contact"
+              href="/contact#contact-section"
               className="group px-4 py-3 text-lg font-medium text-white rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 shadow-md transition-all hover:shadow-lg hover:scale-[1.03]"
             >
               <span className="flex items-center gap-2">
@@ -96,7 +96,7 @@ export default function FancyHeroSection() {
               </span>
             </Link>
             <Link
-              href="/services"
+              href="/services#case-studies"
               className="flex items-center justify-center px-4 py-3 text-lg font-medium text-gray-700 bg-white/80 border border-gray-200 rounded-xl shadow-sm hover:border-blue-300 hover:text-blue-600 transition-all"
             >
               View Our Work
