@@ -7,7 +7,7 @@ export default function AboutFounderStory() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center space-y-4 mb-16">
           <h2 className="font-heading font-bold text-3xl lg:text-4xl text-foreground">
-            Co-Founder's Story
+            Founder's Story
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Meet the visionary behind RankoLink's success and commitment to
@@ -21,7 +21,7 @@ export default function AboutFounderStory() {
               <CardContent className="p-0 rounded-lg overflow-hidden">
                 <img
                   src="/founder-adnan-portrait.png"
-                  alt="Mr. Adnan - Co-Founder of RankoLink"
+                  alt="Mr. Adnan - Founder of RankoLink"
                   className="w-full h-auto rounded-lg"
                 />
               </CardContent>
@@ -56,7 +56,7 @@ export default function AboutFounderStory() {
                       website will rank on Google."
                     </blockquote>
                     <div className="text-sm text-muted-foreground">
-                      — Mr. Adnan, Co-Founder
+                      — Mr. Adnan, Founder
                     </div>
                   </div>
                 </div>
